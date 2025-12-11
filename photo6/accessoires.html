@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sen Café - Nos Produits</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --navbar-height: 68px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: var(--navbar-height);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #1a1a1a !important;
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.15);
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 2.5rem !important;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-svg {
+            height: 50px;
+            filter: drop-shadow(0 0 20px rgba(255, 193, 7, 0.6));
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 2rem;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.85rem;
+            color: #ffc107;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .product-price {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .btn-add-cart {
+            background: #1a1a1a;
+            color: #ffc107;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem !important;
+            }
+            
+            .logo-svg {
+                height: 30px;
+            }
+
+            :root {
+                --navbar-height: 60px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand text-light">
+                Sen <span class="bg-gradient p-1 rounded-3 text-warning">café
+                    <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#b27214" d="M73.862 8.713h364.279V503.29H73.862z"/>
+                        <path fill="#f7b239" d="M118.181 53.032h275.652V458.97H118.181z"/>
+                        <path fill="#fff" d="M176.924 247.287c0 41.704 33.807 75.511 75.511 75.511s75.511-33.808 75.511-75.511H176.924z"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Nos <span style="color:#ffc107";>Accessoires</span></h2>
+            <p class="section-subtitle">Découvrez notre sélection d'accessoires uniques pour accompagner votre expérience café.</p>
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=600&h=600&fit=crop" class="product-image" alt="Earthen Bottle">
+                        <div class="product-content">
+                            <h3 class="product-name">Earthen Bottle</h3>
+                            <p class="product-description">Une bouteille artisanale en terre cuite pour une conservation naturelle.</p>
+                            <div class="product-footer">
+                                <span class="product-price">$48</span>
+                                <a href="#" class="btn-add-cart">Commander</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=600&fit=crop" class="product-image" alt="Nomad Tumbler">
+                        <div class="product-content">
+                            <p class="product-description">Gobelet isotherme parfait pour vos déplacements quotidiens.</p>
+                            <div class="product-footer">
+                                <span class="product-price">$35</span>
+                                <a href="#" class="btn-add-cart">Commander</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=600&fit=crop" class="product-image" alt="Focus Paper">
+                        <div class="product-content">
+                            <h3 class="product-name">Focus Paper Refill</h3>
+                            <p class="product-description">Recharges de papier premium pour une écriture fluide.</p>
+                            <div class="product-footer">
+                                <span class="product-price">$89</span>
+                                <a href="#" class="btn-add-cart">Commander</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1565374301371-5b3d8a6e2c9e?w=600&h=600&fit=crop" class="product-image" alt="Ceramic Mug">
+                        <div class="product-content">
+                            <h3 class="product-name">Ceramic Mug</h3>
+                            <p class="product-description">Tasse en céramique faite à la main avec finition mate.</p>
+                            <div class="product-footer">
+                                <span class="product-price">$42</span>
+                                <a href="#" class="btn-add-cart">Commander</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop" class="product-image" alt="Leather Journal">
+                        <div class="product-content">
+                            <h3 class="product-name">Leather Journal</h3>
+                            <p class="product-description">Carnet en cuir véritable pour capturer vos idées.</p>
+                            <div class="product-footer">
+                                <span class="product-price">$65</span>
+                                <a href="#" class="btn-add-cart">Commander</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1585670767728-cdbe8035d3bb?w=600&h=600&fit=crop" class="product-image" alt="Canvas Tote">
+                        <div class="product-content">
+                            <h3 class="product-name">Canvas Tote</h3>
+                            <p class="product-description">Sac en toile durable et écologique pour tous vos besoins.</p>
+                            <div class="product-footer">
+                                <span class="product-price">$52</span>
+                                <a href="mailto:cheikhkide2002@gmail.com?subject=Commande%20" class="btn-add-cart">Commander</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Produits</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Clients Satisfaits</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">4.9★</div>
+                        <div class="stat-label">Note Moyenne</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
